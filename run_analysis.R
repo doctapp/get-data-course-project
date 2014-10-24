@@ -65,7 +65,7 @@ readset <- function(name) {
         return(set)
 }
 
-# Read and test and trainning data sets
+# Read the test and trainning data sets
 testdata <- readset("test")
 traindata <- readset("train")
 
@@ -73,8 +73,8 @@ traindata <- readset("train")
 # >>> See Step 1.
 data <- rbind(testdata, traindata)
 
-# Classify the data with activity and subject as the ids and
-# all other columns as measures
+# Classify the data with activity and subject as the ids,
+# and use all other columns as measures i.e. variables
 data_melted <- melt(data, id.vars=c("activity", "subject"))
 
 # Create a tidy data set showing mean by activity and subject for all variables
