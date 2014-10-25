@@ -1,6 +1,6 @@
 # Get Data Course Project
 
-This repo contains files used in the context of the `Getting and Cleaning Data` course. The project consists in transforming a [Human Activity Recognition Using Smartphones](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) dataset into a tidy one.
+This repo contains files used in the context of the `Getting and Cleaning Data` course. The project consists in transforming a [Human Activity Recognition Using Smartphones](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) dataset into a tidy one providing the average of smartphone sensor measures for each activity and subject of the study.
 
 ## Transforming the Original Dataset
 To transform the [original dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip), simply do the following:
