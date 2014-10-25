@@ -2,12 +2,12 @@ require("data.table")
 require("reshape2")
 
 # Basically, do the following:
-# 0. Download and unzip the data set
-# 1. Merge the training and the test sets to create one data set
+# 0. Download and unzip the dataset
+# 1. Merge the training and the test sets to create one dataset
 # 2. Extract only the measurements on the mean and standard deviation for each measurement
-# 3. Use descriptive activity names to name the activities in the data set
-# 4. Appropriately label the data set with descriptive variable names
-# 5. Create an independent tidy data set with the average of each variable for each activity and each subject
+# 3. Use descriptive activity names to name the activities in the dataset
+# 4. Appropriately label the dataset with descriptive variable names
+# 5. Create an independent tidy dataset with the average of each variable for each activity and each subject
 
 # Download the input file if not available locally
 # >>> See Step 0.
@@ -32,8 +32,8 @@ activities <- read.table("UCI HAR Dataset/activity_labels.txt")[,2]
 features <- gsub("[()]", "", features)
 features <- gsub("[-,]", ".", features)
 
-# Create a function which reads a unified data set
-# Both the test and train data sets share the same structure,
+# Create a function which reads a unified dataset
+# Both the test and train datasets share the same structure,
 # so combine the subject, activity and features relating to
 # mean and standard deviation
 # Examples:
@@ -44,7 +44,7 @@ readset <- function(name) {
         # Create directory path e.g. UCI HAR Dataset/test or UCI HAR Dataset/train
         dir <- file.path("UCI HAR Dataset", name)
 
-        # Read the subject, X and y data sets using the specified column names
+        # Read the subject, X and y datasets using the specified column names
         subject <- read.table(sprintf("%s/subject_%s.txt", dir, name), col.names = "subject")
         y <- read.table(sprintf("%s/y_%s.txt", dir, name), col.names = "activity")
         x <- read.table(sprintf("%s/X_%s.txt", dir, name), col.names = features)
@@ -58,18 +58,18 @@ readset <- function(name) {
         # >>> See Step 3.
         y$activity <- activities[y$activity]
         
-        # Create a unified data set
+        # Create a unified dataset
         set <- cbind(subject, y, x)
 
-        # Return the resulting data set
+        # Return the resulting dataset
         return(set)
 }
 
-# Read the test and trainning data sets
+# Read the test and trainning datasets
 testdata <- readset("test")
 traindata <- readset("train")
 
-# Merge both data sets
+# Merge both datasets
 # >>> See Step 1.
 data <- rbind(testdata, traindata)
 
@@ -77,9 +77,9 @@ data <- rbind(testdata, traindata)
 # and use all other columns as measures i.e. variables
 data_melted <- melt(data, id.vars=c("activity", "subject"))
 
-# Create a tidy data set showing mean by activity and subject for all variables
+# Create a tidy dataset showing mean by activity and subject for all variables
 # >>> See Step 5.
 tidy <- dcast(data_melted, activity + subject ~ variable, mean)
 
-# Write the final tidied data set
+# Write the final tidied dataset
 write.table(tidy, "out.txt", row.names = FALSE)
